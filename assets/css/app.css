@@ -1,0 +1,218 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+.header {
+    height: .9rem;
+    background: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(186, 186, 186);
+    font-size: 0;
+    position: relative;
+}
+.header span {
+    font-size: .5rem;
+    line-height: .9rem;
+    position: absolute;
+    left: .2rem;
+    top: 0;
+}
+.header-title {
+    font-size: .36rem;
+    line-height: calc(.9rem - 1px);
+    text-align: center;
+}
+
+/**
+ * swiper style
+ */
+.swiper-slide > img {
+    max-width: 100%;
+}
+.swiper-pagination > span {
+    border-radius: 0;
+    width: .3rem;
+    height: 2px;
+}
+.swiper-pagination-bullet-active {
+    background: #ff6868;
+}
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0 1px;
+}
+
+.main {
+    flex: 1;
+    /* 神奇的一段代码 */
+    height: 0;
+    overflow-y: scroll;
+}
+
+.news-pic-list {
+    padding: .1rem .24rem;
+}
+.news-pic-list .title {
+    font-size: .3rem;
+    line-height: .4rem;
+    height: .8rem;
+    position: relative;
+}
+.news-pic-list .time {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: .24rem;
+    color: #7b7b7b;
+}
+.news-pic-list .pic-list {
+    padding-top: .1rem;
+}
+.news-pic-list ul {
+    display: flex;
+}
+.news-pic-list ul li {
+    flex: 1;
+    margin-right: .06rem;
+}
+.news-pic-list ul li:last-of-type {
+    margin-right: 0;
+}
+.news-pic-list ul li img {
+    width: 100%;
+}
+
+
+.arc-list {
+    padding: .1rem .24rem;
+}
+.arc-list ul li {
+    border-top: 1px solid #f0f0f0;
+    padding: .22rem 0;
+}
+.arc-list ul li a {
+    display: flex;
+    overflow: hidden;
+}
+.arc-list ul li a .img_wrapper {
+    display: block;
+    width: 2.26rem;
+}
+.arc-list ul li a .img_wrapper img {
+    width: 100%;
+}
+
+.arc-list ul li a .list-right {
+    flex: 1;
+    margin-left: .18rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.arc-list ul li a .list-right h5 {
+    font-size: .3rem;
+    line-height: .5rem;
+}
+.arc-list ul li a .list-right em {
+    font-size: .24rem;
+    color: #7b7b7b;
+    text-align: right;
+}
+
+
+.footer {
+    height: 1rem;
+    background: url(../images/ft-bg.jpg);
+    background-size: cover;
+    border-top: 1px solid #f0f0f0;
+}
+
+.nav{
+	height: .8rem;
+	overflow: hidden;
+	position: relative;
+}
+
+.nav #scroller{
+	height: .8rem;
+	position: absolute;
+}
+
+.nav ul{
+	height: 100%;
+	/*不让行内子元素换行*/
+	white-space: nowrap;	
+}
+
+.nav ul li {
+	padding: 0 .5rem;
+	line-height: .8rem;
+	height: .8rem;
+	display: inline-block;
+	font-size: .24rem;
+	/*改变垂直变化的基准线为上（原基准线为底线）*/
+	vertical-align: top;
+}
+
+.nav ul li.selected{
+	border-bottom: 2px solid #fe6d6a;	
+}
+
+.blank {
+	height: .14rem;
+	background: #f0f0f0;
+}
+.tab{
+	position: relative;
+	width: 100%;
+	padding: .21rem .24rem;
+}
+
+.tab_content{
+	display: flex;
+	height: 2.81rem;
+	border-bottom: 1px solid rgb(186, 186, 186);
+}
+
+.tab_img{
+	width: 2.4rem;
+	height: 2.4rem;
+}
+
+
+.tab_text{
+	flex: 1;
+	margin-left: .19rem;
+	background: ;
+	padding-right: .98rem;
+	height: 2.4rem;
+	font-size: .24rem;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.tab_text_title{
+	margin-top: .23rem;
+	color: #272636;
+	display: block;
+	height: 1.24rem;
+	line-height: .45rem;
+}
+
+.tab_text_price{
+	display: block;
+	font-size: .36rem;
+	vertical-align: top;
+	color: #df1d01;
+}
+
+.loading{
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	background: url(../images/loading.gif);
+	background-size: cover;
+	left: 50%;	
+	margin-left: -20px;
+	top: .8rem;
+}

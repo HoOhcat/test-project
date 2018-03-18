@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/font.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/app.css">
+    <title>App</title>
+    <script>
+        var deviceWidth = document.documentElement.clientWidth;
+        if (deviceWidth > 750) deviceWidth = 750;
+        document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+    </script>
+</head>
+<body>
+    <header class="header">
+        <span class="lnr lnr-chevron-left"></span>
+        <h2 class="header-title">书写工具</h2>
+    </header>
+    <section class="main">
+       <nav class="nav" id="wrapper">
+       			<div id="scroller">
+			       	<ul>
+			       		<li class="selected">铅笔</li>
+			       		<li>水性笔</li>
+			       		<li>圆珠笔</li>
+			       		<li>彩笔</li>
+			       		<li>签字笔</li>
+			       		<li>圆珠笔</li>
+			       		<li>彩笔</li>
+			       		<li>圆珠笔</li>
+			       	</ul>
+		       	</div>
+       </nav>
+       
+       <div class="blank"></div>
+       
+       <div class="tab" id="selection">
+       		<div class="loading"></div>
+       </div>
+       
+    </section>
+    
+    <footer class="footer"></footer>
+
+	<script src="assets/js/iscroll.js"></script>
+	<script src="assets/js/jquery-1.11.3.min.js"></script>
+    <script>
+    	//当前索引
+    	var curIndex=0;
+    	var obj=$('.loading');
+    	
+    	//实例化对象
+       	var myScroll = new IScroll('#wrapper', { scrollX: true, scrollY: false });
+       
+	    //事件委派
+	  	var event = function (){
+       		document.getElementById("wrapper").onclick=function (ev){
+       			ev.stopPropagation();
+       			var oTarget =ev.target;
+       			
+       			
+       			if (oTarget.nodeName == "LI")
+       			{
+       				
+       				
+       				myScroll.scrollToElement(oTarget);
+       				
+       				curIndex=$(oTarget).index();
+       				changeStyle();
+       				getData();
+       			}
+       		}
+       }()
+       
+       function changeStyle()
+       {
+       		/* 原生js实现
+       		var oLi=document.getElementById("wrapper").getElementsByTagName("LI");
+       		//清空选中样式
+			for (i=0;i<oLi.length;i++){
+				oLi[i].className='';
+			}
+			oLi[curIndex].className="selected";*/
+			
+			//jQuery实现
+			$('#wrapper #scroller ul li').eq(curIndex).addClass("selected").siblings().removeClass('selected');
+       }
+       
+       function getData(){
+	       $.ajax({
+	       		type:"GET",
+	       		url:"http://192.168.2.123/mobile-demo/server/list.php",
+	       		data:{
+	       			id: curIndex+'',
+	       		},
+	       		dataType:"json",
+	       }).done(function (data){
+	       		console.log(data);
+	       		if (data.errCode ==1)
+	       		{
+	       			setTimeout(funciton (){
+	       				insDom(data.info);
+	       			},500)
+	       			
+	       		}
+	       		else 
+	       		{
+	       			alert(data.errMsg);
+	       		}
+	       }).error()
+       }
+       
+       
+       function insDom(info){
+	       	var str='';
+	   		for (var i=0;i<info.length;i++){
+	   			var temp=['<div class="tab_content">',
+	   						'<img  src="'+info[i].img_url+'" class="tab_img"/>',
+	   						'<div class="tab_text">',
+	   							'<h5 class="tab_text_title">'+info[i].title+'</h5>',
+	   							'<span class="tab_text_price">￥'+info[i].price+'</span>',
+	   						'</div>',
+	   						'</div>'];
+	   			temp=temp.join('');
+	   			str+=temp;
+	   		}
+	   		$('.tab').html(str);
+       }
+       changeStyle();
+       getData();
+       console.log(obj);
+    </script>
+</body>
+</html>
